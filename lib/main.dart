@@ -21,21 +21,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Text('Welcome to the Home screen!')),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/details');
-            },
-            child: Text('Go to Details'),
-          ),
-        ],
-      )
-      // body: Center(
-      //   child: Text('Welcome! Try opening myapp://details/42'),
-      // ),
+      // body: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     Center(child: Text('Welcome to the Home screen!')),
+      //     ElevatedButton(
+      //       onPressed: () {
+      //         Navigator.pushNamed(context, '/details');
+      //       },
+      //       child: Text('Go to Details'),
+      //     ),
+      //   ],
+      // )
+      body: Center(
+        child: Text('Welcome! Try opening myapp://details/42'),
+      ),
     );
   }
 }
