@@ -42,20 +42,31 @@ class _MyAppState extends State<MyApp> {
   void _handleIncomingLink(Uri uri) {
     final linkText = 'Received link: ${uri.toString()}';
     // Debug log for adb logcat
-    print('DeepLink received: ${uri.toString()}');
     // Update visible status
     setState(() => _status = linkText);
 
     // Ensure navigation runs after current frame to avoid navigator/route issues
-    if (uri.host == 'details') {
-      final id = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : 'unknown';
+    // if (uri.host == 'details') {
+    //   final id = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : 'unknown';
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     // show a SnackBar for immediate feedback using the scaffold key
+    //     final messengerState = _scaffoldMessengerKey.currentState;
+    //     messengerState?.showSnackBar(SnackBar(content: Text('Opening details: $id')));
+
+    //     // navigate using the navigator key
+    //     _navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => DetailScreen(id: id)));
+    //   });
+    // }
+
+    if (uri.host == 'profile') {
+      final username = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : 'unknown';
       WidgetsBinding.instance.addPostFrameCallback((_) {
         // show a SnackBar for immediate feedback using the scaffold key
         final messengerState = _scaffoldMessengerKey.currentState;
-        messengerState?.showSnackBar(SnackBar(content: Text('Opening details: $id')));
+        messengerState?.showSnackBar(SnackBar(content: Text('Opening details: $username')));
 
         // navigate using the navigator key
-        _navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => DetailScreen(id: id)));
+        _navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => ProfileScreen(username: username)));
       });
     }
   }
@@ -91,6 +102,24 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Details')),
       body: Center(child: Text('You opened item ID: $id')),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  final String username;
+  const ProfileScreen({required this.username});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Profile')),
+      body: Center(
+        child: Text(
+            "Kmuzaki greets you kindly, $username!",
+            style: TextStyle(fontStyle: FontStyle.italic),
+        )
+      )
     );
   }
 }

@@ -34,7 +34,7 @@
                 <!-- Custom scheme and host -->
                 <data
                     android:scheme="myapp"
-                    android:host="details" />
+                    android:host="profile" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
